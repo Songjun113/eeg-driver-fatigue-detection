@@ -1,11 +1,15 @@
 """
 Caculate significant electrodes for the whole dataset
+计算每个电极在整个数据库中的权重
 
 In this method weights for each electrode is caculated with the whole dataset. Instead of filtering drivers they are all taken into account when caculating the weight for a specific electrode. These **weights will generally be lower** than weights in the **Method 1**. 
 
 In practice, each driver has it's own significant electrodes and those electrodes don't have to be significant for other drivers. Significant electrodes are not significant for all drivers.
+每个司机有自己的功能脑区，因此每个人所适配的电极权重应该是不一样的，这个脚本是在所有数据集上进行测试的
 
 For example: electrode F4 might perform well for drivers (3,4) but not so well for the rest of the drivers (1,2,5,...,12). Because the electrode F4 has little significance in predicting the state for drivers (1,2,5,...,12) the accuracy will be low for those drivers but high for the other drivers (3,4). Since validation is performed on all drivers this results in validation disbalance. Even though electrode performs well for only 2 drivers (3,4), resulting in accuracy that's generally low compared to **Method 1** accuracy.
+
+此外，这部分代码是在其它代码里调用的
 """
 
 from typing import Dict, List

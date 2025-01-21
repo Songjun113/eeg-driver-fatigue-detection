@@ -4,7 +4,7 @@ numpy==1.20.3
 mne
 pandas
 matplotlib
-sklearn
+scikit-learn
 mne[data]
 tqdm
 PyQt5

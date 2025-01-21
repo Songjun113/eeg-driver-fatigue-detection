@@ -1,5 +1,6 @@
 """
 Caculate significant electrodes for each user
+可以参考上一个代码的解释，这里主要是进行每个司机的单独适配
 
 In this method weights for each electrode is caculated for each user. Once all weights are obtained, average weights across all users and all electrodes is caculated, resulting in 30 average weights for each electrode.
 

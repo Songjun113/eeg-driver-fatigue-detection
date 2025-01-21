@@ -1,4 +1,12 @@
 """
+用于解压同时进行格式转化，感觉不是很用的上？
+用法————
+
+python script.py \
+  --dir ./my_dataset \
+  --mat ./path/to/5202751.zip \
+  --cnt ./path/to/5202739.zip
+
 Unzips the dataset zips 5202739.zip 5202751.zip downloaded from
 - https://figshare.com/articles/dataset/The_original_EEG_data_for_driver_fatigue_detection/5202739
 - https://figshare.com/articles/dataset/The_entropy_value_for_driver_fatigue_detection/5202751/1

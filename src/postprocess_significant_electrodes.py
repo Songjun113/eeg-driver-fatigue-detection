@@ -1,6 +1,9 @@
 """
+注：这个代码 导入的测试分割比例参数不对 split_and_normalize配置困难
+
 Summary:
     Finds significant electrodes by caculating weight described by the formula in the paper
+    基于前面两个代码的真正计算权重的代码 
 
 Steps:
     Load already trained model via --svm argument (use it's hyperparameters)
@@ -53,8 +56,8 @@ df: DataFrame = read_pickle(args.df)
 training_columns = list(df.iloc[:, df.columns.str.contains(training_columns_regex)].columns)
 X = df.loc[:, ~df.columns.isin(["is_fatigued"])]
 y = df.loc[:, df.columns.isin(["is_fatigued", "driver_id"])]
+# X_train_org, X_test_org, y_train_org, y_test_org = split_and_normalize(X, y, training_columns)
 X_train_org, X_test_org, y_train_org, y_test_org = split_and_normalize(X, y, training_columns, test_size=0.5)
-
 model: SVC = load_model(args.svm).best_estimator_
 
 result = []
