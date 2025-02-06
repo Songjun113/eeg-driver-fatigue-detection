@@ -1,7 +1,7 @@
 """
 Normalized the dataframe.
 Features will be scaled to [0,1]
-用于将df进行归一化，可以用，但得现有rawdata的格式
+用于将df进行归一化，可以用，但先有rawdata的格式
 
 """
 

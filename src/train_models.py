@@ -1,14 +1,21 @@
 """
 Load the dataset with the --df argument
 Use all entropy features during the training phase
+通过网格搜索训练多个模型，并评估其在不同策略下的性能
 Train each model via grid serach method:
+models定义了要训练的四个分类模型
+SVM(model_svc)、随机森林(model_rfc)、MLP(model_mlp)和KNN(model_knn)。
     - SVC (SVM)
     - MLPClassifier (Multi-layer Perceptron classifier)
     - RandomForestClassifier
     - KNeighborsClassifier
+
 Save each model to file (data/models)
 Create an report for each model
 Create a report file
+使用：
+python train_models.py --df data.pkl --strategies leaveoneout split
+
 """
 import argparse
 import warnings
@@ -28,7 +35,7 @@ from tabulate import tabulate
 from tqdm import tqdm
 
 from model import model_knn, model_mlp, model_rfc, model_svc
-from preprocess_preprocess_df import split_and_normalize
+from B_preprocess_preprocess_df import split_and_normalize
 from utils_env import training_columns_regex
 from utils_file_saver import TIMESTAMP_FORMAT, save_model
 from utils_functions import glimpse_df, stdout_to_file

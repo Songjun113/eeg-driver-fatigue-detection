@@ -1,4 +1,7 @@
 """
+基于不同熵组合训练SVM模型并评估性能,15种不同的熵组合
+python train_entropies.py --df data.pkl
+
 Load the dataset with the --df argument
 Create all possible combinations of entropies: [('PE'), ('AE'), ('SE'), ('FE'), ('PE', 'AE'), ('PE', 'SE'), ('PE', 'FE'), ('AE', 'SE'), ('AE', 'FE'), ('SE', 'FE'), ('PE', 'AE', 'SE'), ('PE', 'AE', 'FE'), ('PE', 'SE', 'FE'), ('AE', 'SE', 'FE'), ('PE', 'AE', 'SE', 'FE')]
 Train GridSearch SVM model on each entropy combination
@@ -7,9 +10,12 @@ Create a report file
 
 ------------------------------------------
 
-Before training the models with the whole dataset, all possible combinations of entropy will be explored to find the combination which produces the highest accuracy on the test dataset. 15 possible entropy combinations are: [('PE'), ('AE'), ('SE'), ('FE'), ('PE', 'AE'), ('PE', 'SE'), ('PE', 'FE'), ('AE', 'SE'), ('AE', 'FE'), ('SE', 'FE'), ('PE', 'AE', 'SE'), ('PE', 'AE', 'FE'), ('PE', 'SE', 'FE'), ('AE', 'SE', 'FE'), ('PE', 'AE', 'SE', 'FE')]
+Before training the models with the whole dataset, 
+all possible combinations of entropy will be explored to find the combination which produces the highest accuracy on the test dataset. 
+15 possible entropy combinations are: [('PE'), ('AE'), ('SE'), ('FE'), ('PE', 'AE'), ('PE', 'SE'), ('PE', 'FE'), ('AE', 'SE'), ('AE', 'FE'), ('SE', 'FE'), ('PE', 'AE', 'SE'), ('PE', 'AE', 'FE'), ('PE', 'SE', 'FE'), ('AE', 'SE', 'FE'), ('PE', 'AE', 'SE', 'FE')]
 
-The best combination of entropy features will be used to train 4 already defined models. This step will also show how much each entropy might contribute to importance of predicting participant's driving state.
+The best combination of entropy features will be used to train 4 already defined models. 
+This step will also show how much each entropy might contribute to importance of predicting participant's driving state.
 
 It's assumed that combination with all 4 entropies will produce the highest prediction accuracy on the test dataset simply because model has more data to work with.
 """
@@ -24,7 +30,7 @@ from sklearn.metrics import classification_report
 from tqdm import tqdm
 
 from model import model_svc
-from preprocess_preprocess_df import split_and_normalize
+from B_preprocess_preprocess_df import split_and_normalize
 from utils_env import entropy_names, training_columns_regex
 from utils_functions import (get_dictionary_leaves, get_timestamp, powerset,
                              stdout_to_file)

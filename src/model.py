@@ -1,3 +1,6 @@
+"""
+定义了各种模型
+"""
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV

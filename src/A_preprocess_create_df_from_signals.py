@@ -28,6 +28,9 @@ preprocess procedures N (N <1, +>)
 
 The dataframe file is saved at ./data/dataframes by default
 Dataframe files with prefix "complete-clean" should be used as the dataframe for training later on. 
+
+//python A_preprocess_create_df_from_signals.py --driver_num 5 --signal-duration 200 --use-brainbands --use-reref
+
 """
 
 import argparse
@@ -46,7 +49,7 @@ from mne.io.cnt import read_raw_cnt
 from pandas import DataFrame, set_option
 from tqdm import tqdm
 
-from preprocess_preprocess_df import df_replace_values
+from B_preprocess_preprocess_df import df_replace_values
 from utils_env import (FATIGUE_STR, FREQ, LOW_PASS_FILTER_RANGE_HZ,
                        NOTCH_FILTER_HZ, NUM_USERS,
                        SIGNAL_DURATION_SECONDS_DEFAULT, SIGNAL_OFFSET,

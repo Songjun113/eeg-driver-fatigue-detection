@@ -1,20 +1,27 @@
 """
-注：这个代码 导入的测试分割比例参数不对 split_and_normalize配置困难
+--df：输入的训练数据文件，.pkl 格式的文件。
+--svm：输入的已训练 SVM 模型文件，.pkl 格式的文件。
+--mode：选择计算显著电极的模式，drivers 或 all。
+--output-report：指定报告文件保存的目录，默认路径为 PATH_REPORT。
+--channels-ignore：指定需要忽略的电极（如果有）。
 
 Summary:
     Finds significant electrodes by caculating weight described by the formula in the paper
     基于前面两个代码的真正计算权重的代码 
-
 Steps:
     Load already trained model via --svm argument (use it's hyperparameters)
     Load the dataset with the --df argument
-    Refit the model (using the same hyperparameters) with a new train_test_split, because it's not known which data was used during the training phase 
+    Refit the model (using the same hyperparameters) with a new train_test_split, 
+    because it's not known which data was used during the training phase 
     Caculate weight for every channel and sort the list
     Create a report file
 
 --------------------
 
-Some electrodes are more important for predicting driver's state. To find the most significant electrodes we will use methods described in paper where we caculate weights for each electrode. Electrode with the highest weight is considered to be the most important.
+Some electrodes are more important for predicting driver's state. 
+To find the most significant electrodes we will use methods described in paper where we caculate weights for each electrode. 
+Electrode with the highest weight is considered to be the most important.
+
 """
 
 import argparse
@@ -26,7 +33,7 @@ from sklearn.svm import SVC
 
 from postprocess_significant_electrodes_all import caculate_mode_all
 from postprocess_significant_electrodes_users import caculate_mode_drivers
-from preprocess_preprocess_df import (split_and_normalize,
+from B_preprocess_preprocess_df import (split_and_normalize,
                                       training_columns_regex)
 from utils_env import channels_good
 from utils_file_saver import load_model

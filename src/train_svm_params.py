@@ -1,11 +1,17 @@
 """
 Finds the best C and gamma hyperparameters for SVM model by using Leave One Group out approach.
+使用“Leave One Group Out”（LOO）交叉验证来寻找支持向量机（SVM）模型的最佳超参数C和gamma
 
 A single group of rows is defined by participant's id (driver_id).
 Effectively, this is LOO approach where 1 participant is left for validation and other 11 are used for training the model
 
 Load the dataset with the --df argument
 Calculate the accuracy for each hyperparameter pair
+
+使用
+python script.py --df data.pkl
+数据集文件路径
+
 """
 import argparse
 from itertools import product
@@ -19,7 +25,7 @@ from sklearn.svm import SVC
 from tqdm import tqdm
 
 from model import wide_params
-from preprocess_preprocess_df import split_and_normalize
+from B_preprocess_preprocess_df import split_and_normalize
 from utils_env import NUM_USERS, training_columns_regex
 from utils_functions import get_timestamp, glimpse_df, stdout_to_file
 from utils_paths import PATH_REPORT
