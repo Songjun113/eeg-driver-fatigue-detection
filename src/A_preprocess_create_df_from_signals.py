@@ -65,6 +65,8 @@ from utils_signal import SignalPreprocessor
 set_option("display.max_columns", None)
 warnings.filterwarnings("ignore")
 
+#定义输入形式 command line arguments
+# 输入自定义变量
 parser = argparse.ArgumentParser()
 parser.add_argument("--driver_num", metavar="N", type=int, help="Number of drivers that will be used (1 >= N <= 12)")
 parser.add_argument("--signal-duration", metavar="N", type=int, help="Duration of the signal in seconds (1 >= N <= 300)")
@@ -73,9 +75,7 @@ parser.add_argument("--df-checkpoint", metavar="df", type=str, help="Load precac
 parser.add_argument("--output-dir", metavar="dir", type=str, help="Directory where dataframe and npy files will be saved", default=PATH_DATAFRAME)
 parser.add_argument("--use-brainbands", dest="use_brainbands", action="store_true", help="Decompose signal into alpha and beta bands")
 parser.add_argument("--use-reref", dest="use_reref", action="store_true", help="Apply channel rereferencing")
-parser.add_argument(
-    "--channels-ignore", nargs="+", help="List of channels (electrodes) that will be ignored. Possible values: [HEOL, HEOR, FP1, FP2, VEOU, VEOL, F7, F3, FZ, F4, F8, FT7, FC3, FCZ, FC4, FT8, T3, C3, CZ, C4, T4, TP7, CP3, CPZ, CP4, TP8, A1, T5, P3, PZ, P4, T6, A2, O1, OZ, O2, FT9, FT10, PO1, PO2]"
-)
+parser.add_argument("--channels-ignore", nargs="+", help="List of channels (electrodes) that will be ignored. Possible values: [HEOL, HEOR, FP1, FP2, VEOU, VEOL, F7, F3, FZ, F4, F8, FT7, FC3, FCZ, FC4, FT8, T3, C3, CZ, C4, T4, TP7, CP3, CPZ, CP4, TP8, A1, T5, P3, PZ, P4, T6, A2, O1, OZ, O2, FT9, FT10, PO1, PO2]")
 parser.set_defaults(driver_num=NUM_USERS)
 parser.set_defaults(signal_duration=SIGNAL_DURATION_SECONDS_DEFAULT)
 parser.set_defaults(epoch_events_num=FREQ)
@@ -84,6 +84,7 @@ parser.set_defaults(use_reref=False)
 parser.set_defaults(channels_ignore=[])
 args = parser.parse_args()
 
+# 读取输入的各个变量
 driver_num = args.driver_num
 signal_duration = args.signal_duration
 epoch_events_num = args.epoch_events_num
@@ -96,6 +97,7 @@ channels = list(set(channels_good) - set(channels_ignore))
 is_complete_dataset = not any(map(lambda arg_name, parser=parser, args=args: is_arg_default(arg_name, parser, args), ["driver_num", "signal_duration", "epoch_events_num", "channels_ignore"]))
 train_metadata = {"is_complete_dataset": is_complete_dataset, "brains": use_brainbands, "reref": use_reref}
 print("Creating {} dataset...".format("complete" if is_complete_dataset else "partial"))
+
 
 
 def load_clean_cnt(filename: str, channels: List[str]):
@@ -239,7 +241,7 @@ df = DataFrame.from_dict(df_dict)
 df["is_fatigued"] = df["is_fatigued"].astype(int)
 df["driver_id"] = df["driver_id"].astype(int)
 df["epoch_id"] = df["epoch_id"].astype(int)
-df.to_pickle(str(Path(output_dir, ".raw_df.pkl")))
+df.to_pickle(str(Path(output_dir, ".raw_df.pkl"))) #打包操作
 
 """Save to files"""
 save_df(df, is_complete_dataset, output_dir, "raw", train_metadata)

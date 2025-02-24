@@ -67,7 +67,7 @@ def filesaver_decorator(func):
 
 def set_file_metadata(filepath, metadata):
     metadata_bytes = dict_to_byte_metadata(metadata)
-    os.setxattr(filepath, METADATA_FIELD_TAGS, metadata_bytes)
+    os.setxattr(filepath, METADATA_FIELD_TAGS, metadata_bytes) #这里的代码只有linux可以跑
     return filepath
 
 

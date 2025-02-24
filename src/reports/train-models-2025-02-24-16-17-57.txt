@@ -1,0 +1,2 @@
+{'df': 'D:\\Code\\EEG_paper_2025\\MEFA\\eeg-driver-fatigue-detection\\src\\data\\dataframes\\complete-clean-2022-02-26-is_complete_dataset_true___brains_true___reref_false.pickle', 'output_report': WindowsPath('d:/Code/EEG_paper_2025/MEFA/eeg-driver-fatigue-detection/src/reports'), 'strategies': ['leaveoneout', 'split']} 
+
