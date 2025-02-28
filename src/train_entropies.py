@@ -37,10 +37,22 @@ from utils_functions import (get_dictionary_leaves, get_timestamp, powerset,
 from utils_paths import PATH_REPORT
 
 set_option("display.max_columns", None)
-parser = argparse.ArgumentParser()
-parser.add_argument("--df", metavar="file", required=True, type=str, help="Dataframe file used for training")
-parser.add_argument("-r", "--output-report", metavar="dir", required=False, type=str, help="Directory where report file will be created.", default=PATH_REPORT)
-args = parser.parse_args()
+# parser = argparse.ArgumentParser()
+# parser.add_argument("--df", metavar="file", required=True, type=str, help="Dataframe file used for training")
+# parser.add_argument("-r", "--output-report", metavar="dir", required=False, type=str, help="Directory where report file will be created.", default=PATH_REPORT)
+# args = parser.parse_args()
+
+# 直接指定数据文件路径
+df_file = "D:\Code\EEG_paper_2025\MEFA\eeg-driver-fatigue-detection\src\data\dataframes\complete-clean-2022-02-26-is_complete_dataset_true___brains_true___reref_false.pickle" 
+output_report_dir = "D:\Code\EEG_paper_2025\MEFA\eeg-driver-fatigue-detection\src\\reports"  # 指定报告文件输出目录
+
+
+# 设置参数
+args = argparse.Namespace(
+    df=df_file,
+    output_report=output_report_dir
+)
+
 stdout_to_file(Path(args.output_report, "-".join(["best-entropies", get_timestamp()]) + ".txt"))
 
 

@@ -123,7 +123,6 @@ def low_high_pass_filter(signal: BaseRaw, l_freq, h_freq):
 
     return signal.copy().filter(l_freq=l_freq, h_freq=h_freq)
 
-
 def epochs_to_dataframe(epochs: Epochs, drop_columns=["time", "condition"]):
     """Converts to dataframe and drops unnecessary columns"""
 

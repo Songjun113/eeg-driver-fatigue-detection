@@ -65,11 +65,22 @@ def filesaver_decorator(func):
     return wrapper_decorator
 
 
+# def set_file_metadata(filepath, metadata):
+#     metadata_bytes = dict_to_byte_metadata(metadata)
+#     os.setxattr(filepath, METADATA_FIELD_TAGS, metadata_bytes) #这里的代码只有linux可以跑
+#     return filepath
+
 def set_file_metadata(filepath, metadata):
     metadata_bytes = dict_to_byte_metadata(metadata)
-    os.setxattr(filepath, METADATA_FIELD_TAGS, metadata_bytes) #这里的代码只有linux可以跑
+    
+    # 构造一个对应的 .meta 文件来存储元数据
+    meta_filepath = f"{filepath}.meta"
+    
+    # 写入元数据到 .meta 文件
+    with open(meta_filepath, 'wb') as meta_file:
+        meta_file.write(metadata_bytes)
+    
     return filepath
-
 
 def load_model(path: Path) -> ModelPickle:
     return pickle.loads(load(path))
@@ -178,4 +189,10 @@ def save_npy(ndarray: np.ndarray, is_complete_dataset: bool, directory: Path, na
 
 
 if __name__ == "__main__":
-    pass
+    
+    METADATA_FIELD_TAGS = 'user.metadata'
+    # 测试
+    filepath = 'test_file.txt'
+    metadata = {'author': '松菌君', 'version': '1.0'}
+    set_file_metadata(filepath, metadata)
+    # pass
